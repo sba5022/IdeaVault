@@ -28,8 +28,10 @@ export default function RootLayout({ children }) {
       <body className=" flex flex-col bg-base-100 text-base-content min-h-screen">
         <Navbar/>
       
-        {children}</body>
-        <Footer/>
+        {children}
+         <Footer/>
+        </body>
+       
     </html>
   );
 }

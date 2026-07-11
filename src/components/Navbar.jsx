@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { usePathname } from "next/navigation";
 import React from 'react';
 import { useEffect, useState } from "react";
-
+import { authClient } from "@/lib/auth-client"
+import { Avatar, Button } from '@heroui/react';
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
    const applyTheme = (newTheme) => {
@@ -12,7 +13,19 @@ const Navbar = () => {
   localStorage.setItem("theme", newTheme);
   setTheme(newTheme);
 };
+const handleLogout = async () => {  
 
+  await authClient.signOut();
+}
+ const { 
+        data: session, 
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession() 
+    const user = session?.user;
+
+console.log(user)
   // Replace your current useEffect with this
   useEffect(() => {
   const savedTheme = localStorage.getItem("theme") || "light";
@@ -72,16 +85,27 @@ const isActive = (path) => pathname === path;
       d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
   </svg>
 </label>
-   <Link href='/login'><button  className={`btn ${
+ 
+ {user ? <>
+ <li><Avatar>
+        <Avatar.Image alt="John Doe" src={user?.image}  width={40} height={40} className="rounded-full"/>
+        <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+      </Avatar></li>
+ <li><button className="btn btn-warning" onClick={handleLogout}>
+          Logout
+        </button></li>
+ </>:
+ <><li>  <Link href='/login'><button  className={`btn ${
       pathname === "/login"
         ? "btn-primary text-white"
         : "text-indigo-500"
-    }`}>Login</button></Link>
-   <Link href='/register'><button  className={`btn ${
+    }`}>Login</button></Link></li>
+   <li><Link href='/register'><button  className={`btn ${
       pathname === "/register"
         ? "btn-primary text-white"
         : "text-indigo-500"
-    }`}>Register</button></Link>
+    }`}>Register</button></Link></li></>}
+ 
   </div>
 </div>
         </div>
