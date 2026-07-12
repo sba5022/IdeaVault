@@ -24,8 +24,9 @@ const handleLogout = async () => {
         refetch //refetch the session
     } = authClient.useSession() 
     const user = session?.user;
-
-console.log(user)
+// console.log(session);
+// console.log(isPending);
+// console.log(user)
   // Replace your current useEffect with this
   useEffect(() => {
   const savedTheme = localStorage.getItem("theme") || "light";
@@ -56,6 +57,7 @@ const isActive = (path) => pathname === path;
       `}> <Link href='/' >Home</Link></li>
      
       <li><Link href='/ideas'>Ideas</Link></li>
+      <li><Link href='/add-idea'>Add Idea</Link></li>
     </ul>
   </div>
   <div className="navbar-end flex gap-2">
