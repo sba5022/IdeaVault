@@ -58,6 +58,8 @@ const isActive = (path) => pathname === path;
      
       <li><Link href='/ideas'>Ideas</Link></li>
       <li><Link href='/add-idea'>Add Idea</Link></li>
+      <li><Link href='/my-ideas'>My Ideas</Link></li>
+      <li><Link href='/my-interactions'>My Interactions</Link></li>
     </ul>
   </div>
   <div className="navbar-end flex gap-2">

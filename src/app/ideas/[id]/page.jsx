@@ -1,3 +1,4 @@
+
 import CommentSection from '@/components/Commentsections';
 import { Chip } from '@heroui/react';
 import Image from 'next/image';
@@ -118,7 +119,7 @@ const IdeaDetailsPage = async ({params}) => {
           </div>
         </div>
 
-        <CommentSection  />
+      <CommentSection/>
 
       </div>
     </div>

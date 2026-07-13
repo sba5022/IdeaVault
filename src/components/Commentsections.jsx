@@ -7,37 +7,67 @@ const initialComments = [
  
 ];
 
-export default function CommentSection() {
+export default function CommentSection({ideaId, ideaTitle }) {
   const [comments, setComments] = useState(initialComments);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState();
   const [editingId, setEditingId] = useState(null);
 
-  const handleSubmit = () => {
-    if (!comment.trim()) return;
+  // const handleSubmit = () => {
+  //   if (!comment.trim()) return;
 
-    if (editingId) {
-      setComments(
-        comments.map((item) =>
-          item.id === editingId ? { ...item, text: comment } : item
-        )
-      );
+  //   if (editingId) {
+  //     setComments(
+  //       comments.map((item) =>
+  //         item.id === editingId ? { ...item, text: comment } : item
+  //       )
+  //     );
 
-      setEditingId(null);
-    } else {
-      setComments([
-        {
-          id: Date.now(),
-          user: "Current User",
-          text: comment,
-          createdAt: new Date().toLocaleString(),
-        },
-        ...comments,
-      ]);
-    }
+  //     setEditingId(null);
+  //   } else {
+  //     setComments([
+  //       {
+  //         id: Date.now(),
+  //         user: "Current User",
+  //         text: comment,
+  //         createdAt: new Date().toLocaleString(),
+  //       },
+  //       ...comments,
+  //     ]);
+  //   }
 
-    setComment("");
+  //   setComment("");
+  // };
+const handleSubmit = async () => {
+  if (!comment.trim()) return;
+
+  const newComment = {
+    ideaId,          // pass this from parent
+    ideaTitle,       // pass this from parent
+    comment,
+    userEmail: "user@gmail.com", // logged-in user's email
+    createdAt: new Date(),
   };
 
+  await fetch("http://localhost:9000/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newComment),
+  });
+
+  setComments([
+    {
+      id: Date.now(),
+      user: "Current User",
+      text: comment,
+      createdAt: new Date().toLocaleString(),
+    },
+    ...comments,
+  ]);
+
+  setComment("");
+};
   const handleDelete = (id) => {
     setComments(comments.filter((item) => item.id !== id));
   };

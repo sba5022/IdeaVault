@@ -6,6 +6,7 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
 
 const LoginPage = () => {
    const { register,
@@ -16,7 +17,7 @@ const LoginPage = () => {
    console.log(data,'data');
     const{ name,email,password,photoURL } = data;
    console.log(name,email,password,photoURL,'data');
-   const {data:res, error} =  authClient.signIn.email({
+   const {data:res, error} = await  authClient.signIn.email({
      name: name, // required
     email: email, // required
     password: password, // required
@@ -25,10 +26,12 @@ const LoginPage = () => {
    })
    console.log(res,error,'data error');
    if(error){
-alert(error.message);
+toast.error("Invalid Email or Password");
+return;
    }
    if(res){
-alert("Login successful! Please check your email to verify your account.");
+toast.success("Login successful! Please check your email to verify your account.");
+
    }
   };
 const handleGoogleSignIn = async() => {
@@ -42,7 +45,7 @@ const handleGoogleSignIn = async() => {
         <div className='container mx-auto bg-slate-100 min-h-[80vh] flex items-center justify-center space-y-5'>
           <div className="p-4 rounded-md bg-white">
              <h2 className='text-lg font-bold'>Login</h2>
-        <form onSubmit={handleSubmit(handleLoginFunc)}> 
+        <form onSubmit={handleSubmit()}> 
            <fieldset className="fieldset">
   <legend className="fieldset-legend">Email</legend>
   
@@ -63,7 +66,8 @@ const handleGoogleSignIn = async() => {
 
   {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
 </fieldset>
-<button onClick={handleLoginFunc} className="btn btn-primary" type="submit">
+<p>Forget password?</p>
+<button className="btn btn-primary" type="submit">
   Login
 </button>
 </form>
@@ -71,7 +75,7 @@ const handleGoogleSignIn = async() => {
      <p className="text-center">Or Login with </p>
      <Separator/>
    <div>
-          <button onClick={handleGoogleSignIn} className="btn btn-primary
+          <button onClick={handleLoginFunc}  className="btn btn-primary
            w-full ">
      Login with Google
                         
