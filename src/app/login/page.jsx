@@ -7,45 +7,53 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from "next/navigation";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
+  const router = useRouter();
    const { register,
      handleSubmit,formState: { errors } }= useForm();
      const [showPassword, setShowPassword] = React.useState(false);
      console.log(errors,'errors');
-  const handleLoginFunc = async (data) => {
-   console.log(data,'data');
-    const{ name,email,password,photoURL } = data;
-   console.log(name,email,password,photoURL,'data');
-   const {data:res, error} = await  authClient.signIn.email({
-     name: name, // required
-    email: email, // required
-    password: password, // required
-    image: photoURL, // optional
-    callbackURL: "/",
-   })
-   console.log(res,error,'data error');
-   if(error){
-toast.error("Invalid Email or Password");
-return;
-   }
-   if(res){
-toast.success("Login successful! Please check your email to verify your account.");
+ const handleLoginFunc = async (data) => {
+  try {
+    const { email, password } = data;
 
-   }
-  };
+    const { data: res, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error("Invalid email or password");
+      return;
+    }
+
+    toast.success("Login successful!");
+    setTimeout(() => {
+  router.push("/");
+}, 1500);
+  } catch (err) {
+    toast.error("Something went wrong. Please try again.");
+    console.error(err);
+  }
+  
+};
 const handleGoogleSignIn = async() => {
- authClient.signIn.social({
+await  authClient.signIn.social({
     provider: "google",
 
 })
 
 }
     return (
+      
         <div className='container mx-auto bg-slate-100 min-h-[80vh] flex items-center justify-center space-y-5'>
           <div className="p-4 rounded-md bg-white">
              <h2 className='text-lg font-bold'>Login</h2>
-        <form onSubmit={handleSubmit()}> 
+        <form onSubmit={handleSubmit(handleLoginFunc)} className="space-y-4"> 
            <fieldset className="fieldset">
   <legend className="fieldset-legend">Email</legend>
   
@@ -66,16 +74,20 @@ const handleGoogleSignIn = async() => {
 
   {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
 </fieldset>
-<p>Forget password?</p>
-<button className="btn btn-primary" type="submit">
+<Link href="/forgot-password" className="text-sm text-blue-500">
+  Forgot password?
+</Link>
+<br />
+<button  className="btn btn-primary" type="submit">
   Login
 </button>
+<br/>
 </form>
   <Separator/>
      <p className="text-center">Or Login with </p>
      <Separator/>
    <div>
-          <button onClick={handleLoginFunc}  className="btn btn-primary
+          <button onClick={handleGoogleSignIn }  className="btn btn-primary
            w-full ">
      Login with Google
                         

@@ -2,18 +2,21 @@
 import { Separator } from '@heroui/react';
 import { authClient } from "@/lib/auth-client"
 import Link from 'next/link';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEyeSlash, FaEye, FaGoogle } from "react-icons/fa";
 
 const RegisterPage = () => {
+  const router = useRouter();
 const [showPassword, setShowPassword] = React.useState(false);
    const { register,
      handleSubmit,formState: { errors } }= useForm();
    
   const handleRegisterFunc = async(data) => {
-
+try{
    console.log(data,'data');
    
      
@@ -27,12 +30,24 @@ const [showPassword, setShowPassword] = React.useState(false);
     callbackURL: "/",
    })
    console.log(res,error,'data error');
-   if(error){
-alert(error.message);
-   }
-   if(res){
-alert("Registration successful! Please check your email to verify your account.");
-   }
+   if (error) {
+      toast.error(error.message || "Registration failed");
+      return;
+    }
+
+
+    if (res) {
+      toast.success("Registration successful!");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    }
+
+  } catch (error) {
+    toast.error("Something went wrong");
+    console.log(error);
+  }
   };
 const handleGoogleSignIn = async() => {
 await authClient.signIn.social({
@@ -62,16 +77,48 @@ await authClient.signIn.social({
   type="text" className="input" placeholder="Enter your Email" />
   {errors.email && <p className='text-sm text-red-500'>Email is required</p>}
 </fieldset>
-<fieldset className="fieldset relative">
+ 
+ <fieldset className="fieldset relative">
   <legend className="fieldset-legend">Password</legend>
-  <input 
-  {...register('password',{ required: "password is required" })}
-  type={showPassword ? "text" : "password"} className="input" placeholder="Enter your Password" />
+
+  <input
+    {...register("password", {
+      required: "Password is required",
+      minLength: {
+        value: 6,
+        message: "Password must be at least 6 characters",
+      },
+      pattern: {
+        value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+        message:
+          "Password must contain uppercase and lowercase letters",
+      },
+    })}
+    type={showPassword ? "text" : "password"}
+    className="input"
+    placeholder="Enter your Password"
+  />
+
+  <span
+    className="absolute right-3 top-4 cursor-pointer"
+    onClick={() => setShowPassword(!showPassword)}
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </span>
+
+  {errors.password && (
+    <p className="text-sm text-red-500">
+      {errors.password.message}
+    </p>
+  )}
+
+</fieldset>
+  {/* type={showPassword ? "text" : "password"} className="input" placeholder="Enter your Password" />
    <span className='absolute right-3 top-4'
    onClick={()=>setShowPassword(!showPassword)}>
     {showPassword ? <FaEyeSlash /> : <FaEye />}</span>
   {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
-</fieldset>
+</fieldset> */}
  <fieldset className="fieldset">
   <legend className="fieldset-legend">Photo URL</legend>
   

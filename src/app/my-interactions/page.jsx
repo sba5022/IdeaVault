@@ -29,7 +29,7 @@ const MyInteractionsPage = async () => {
                 <h2 className="card-title">{item.ideaTitle}</h2>
 
                 <p className="italic">
-                  "{item.comment}"
+                  {item.comment}
                 </p>
 
                 <p className="text-sm opacity-70">
