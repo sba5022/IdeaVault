@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import TrendingSection from "@/components/TrendingSection";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
     position="top-right"
     autoClose={3000}
   />
+  <TrendingSection/>
          <Footer/>
         </body>
         

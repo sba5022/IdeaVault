@@ -23,7 +23,7 @@ const LoginPage = () => {
     const { data: res, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: "/",
+     
     });
 
     if (error) {
@@ -32,9 +32,9 @@ const LoginPage = () => {
     }
 
     toast.success("Login successful!");
-    setTimeout(() => {
-  router.push("/");
-}, 1500);
+//     setTimeout(() => {
+//   router.push("/");
+// }, 1500);
   } catch (err) {
     toast.error("Something went wrong. Please try again.");
     console.error(err);
