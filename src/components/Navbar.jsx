@@ -91,10 +91,35 @@ const isActive = (path) => pathname === path;
 </label>
  
  {user ? <>
- <li><Avatar>
-        <Avatar.Image alt="John Doe" src={user?.image}  width={40} height={40} className="rounded-full"/>
+  <div className="flex gap-2">
+   
+    <div className="dropdown dropdown-end">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+        <Avatar>
+        <Avatar.Image alt="John Doe" src={user?.image}  width={40} height={40} className="rounded-full "/>
         <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
-      </Avatar></li>
+      </Avatar> 
+
+      </div>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content absolute bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+       <li>
+      <Link href="/profile">Profile</Link>
+    </li>
+
+    <li>
+      <Link href="/edit-profile">Update Profile</Link>
+    </li>
+
+       
+      </ul>
+    </div>
+  </div>
+ {/* <li><Avatar>
+        <Avatar.Image alt="John Doe" src={user?.image}  width={40} height={40} className="rounded-full "/>
+        <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+      </Avatar></li> */}
  <li><button className="btn btn-warning" onClick={handleLogout}>
           Logout
         </button></li>
