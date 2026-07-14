@@ -38,7 +38,7 @@ const handleLogout = async () => {
   applyTheme(theme === "light" ? "dark" : "light");
 };
 const pathname = usePathname();
-const isActive = (path) => pathname === path;
+// const isActive = (path) => pathname === path;
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm sticky">
@@ -51,10 +51,9 @@ const isActive = (path) => pathname === path;
     </div>
     <Link href='/' className="btn btn-ghost text-xl">IdeaVault</Link>
   </div>
-  <div className="navbar-center hidden lg:flex">
+  <div className="navbar-center  lg:flex">
     <ul className="menu menu-horizontal px-1">
-     <li  className={` ${isActive("/") ? "  text-indigo-500" : "text-black"}
-      `}> <Link href='/' >Home</Link></li>
+     <li  className=""> <Link href='/' >Home</Link></li>
      
       <li><Link href='/ideas'>Ideas</Link></li>
       <li><Link href='/add-idea'>Add Idea</Link></li>

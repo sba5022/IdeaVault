@@ -1,13 +1,21 @@
 
 import CommentSection from '@/components/Commentsections';
+import { auth } from '@/lib/auth';
 import { Chip } from '@heroui/react';
 import Image from 'next/image';
 import React from 'react';
-
+import { headers } from 'next/headers';
 const IdeaDetailsPage = async ({params}) => {
     const {id} = await params;
-  
-    const res = await fetch(`http://localhost:9000/idea/${id}`);
+  const {token} = await auth.api.getToken({
+  headers: await headers()
+})
+console.log(token,'token');
+    const res = await fetch(`http://localhost:9000/idea/${id}`,{
+      headers:{
+        authorization: `Bearer ${token}`
+      }
+    });
     const idea = await res.json();
    console.log(idea);
      

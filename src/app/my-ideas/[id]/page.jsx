@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 
-export default function UpdateIdeaPage() {
+
+export default  function UpdateIdeaPage() {
   const { id } = useParams();
   const router = useRouter();
 
@@ -13,7 +14,13 @@ export default function UpdateIdeaPage() {
   const [deleteOpen, setDeleteOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:9000/my-idea/${id}`)
+    fetch(`http://localhost:9000/my-idea/${id}`,
+      {
+        headers: {
+          authorization: "logged in",
+        }
+      }
+    )
       .then((res) => res.json())
       .then((data) => setIdea(data));
   }, [id]);
