@@ -8,7 +8,7 @@ import Image from "next/image";
 export default  function UpdateIdeaPage() {
   const { id } = useParams();
   const router = useRouter();
-
+   
   const [idea, setIdea] = useState(null);
   const [updateOpen, setUpdateOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -17,7 +17,7 @@ export default  function UpdateIdeaPage() {
     fetch(`http://localhost:9000/my-idea/${id}`,
       {
         headers: {
-          authorization: "logged in",
+         authorization:"logged in"
         }
       }
     )
@@ -44,7 +44,8 @@ export default  function UpdateIdeaPage() {
     await fetch(`http://localhost:9000/my-idea/${id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+       "Content-Type":"application/json",
+        authorization:`Bearer ${token}`
       },
       body: JSON.stringify(idea),
     });
@@ -56,6 +57,9 @@ export default  function UpdateIdeaPage() {
 const handleDelete = async () => {
   const res = await fetch(`http://localhost:9000/my-idea/${id}`, {
     method: "DELETE",
+     headers:{
+        authorization:`Bearer ${token}`
+    }
   });
 
   const data = await res.json();

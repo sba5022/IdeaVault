@@ -1,9 +1,21 @@
 import Link from 'next/link';
 import Image from "next/image";
 import React from 'react';
-
+import { auth } from '@/lib/auth';
+import { headers } from "next/headers";
 const MyIdeaPage = async() => {
-    const res = await fetch('http://localhost:9000/my-idea');
+      const { token } = await auth.api.getToken({
+    headers: await headers()
+});
+    const res = await fetch('http://localhost:9000/my-idea',
+      {
+    headers: {
+        authorization: `Bearer ${token}`
+    },
+    cache: "no-store"
+}
+    );
+
     const ideas = await res.json();
     console.log(ideas);
     return (

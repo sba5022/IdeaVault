@@ -1,14 +1,22 @@
 import Link from "next/link";
-
+import { headers } from "next/headers";
+import { auth } from '@/lib/auth';
 const MyInteractionsPage = async () => {
   const email = "user@gmail.com"; // Replace with logged-in user's email
-
+const { token } = await auth.api.getToken({
+    headers: await headers()
+});
   const res = await fetch(
     `http://localhost:9000/my-interactions?email=${email}`,
     {
+      headers:{
+        authorization:`Bearer ${token}`
+    },
       cache: "no-store",
     }
   );
+
+
 
   const comments = await res.json();
 
