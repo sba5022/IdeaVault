@@ -5,7 +5,7 @@ import { Button } from "@heroui/react";
 
 const Banner = () => {
   return (
-    <div className="carousel w-full min-h-[80vh] rounded-box mt-500">
+    <div className="carousel w-full min-h-[80vh] rounded-box ">
 
      
       <div
@@ -108,7 +108,7 @@ const Banner = () => {
 
               <p className="py-6 text-lg opacity-90">
                 From inspiration to execution—IdeaVault keeps every great idea
-                safe until you're ready to build it.
+                safe until youre ready to build it.
               </p>
 
               <Button color="success" size="lg">

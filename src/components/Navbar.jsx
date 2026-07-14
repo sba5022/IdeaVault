@@ -41,7 +41,7 @@ const pathname = usePathname();
 // const isActive = (path) => pathname === path;
     return (
         <div>
-            <div className="navbar bg-base-100 shadow-sm sticky">
+            <div className="navbar bg-base-100 shadow-sm sticky mb-20">
   <div className="navbar-start sticky">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -51,7 +51,7 @@ const pathname = usePathname();
     </div>
     <Link href='/' className="btn btn-ghost text-xl">IdeaVault</Link>
   </div>
-  <div className="navbar-center  lg:flex">
+  <div className="navbar-center hidden  lg:flex">
     <ul className="menu menu-horizontal px-1">
      <li  className=""> <Link href='/' >Home</Link></li>
      
