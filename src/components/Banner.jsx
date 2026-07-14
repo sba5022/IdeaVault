@@ -5,7 +5,7 @@ import { Button } from "@heroui/react";
 
 const Banner = () => {
   return (
-    <div className="carousel w-full min-h-[80vh] rounded-box">
+    <div className="carousel w-full min-h-[80vh] rounded-box mt-500">
 
      
       <div

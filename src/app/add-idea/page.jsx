@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-
+import { authClient } from '@/lib/auth-client';
 const AddIdeaPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -8,10 +8,13 @@ const AddIdeaPage = () => {
     const formData = new FormData(e.currentTarget);
     const idea  =Object.fromEntries(formData.entries());
     console.log(idea);
+    const {data:tokenData}=await authClient.token();
+    console.log(tokenData,'tokenData');
     const res =await fetch('http://localhost:9000/idea',{
       method:'POST',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'authorization':`Bearer ${tokenData?.token}`
       },
       body:JSON.stringify(idea)
     })
