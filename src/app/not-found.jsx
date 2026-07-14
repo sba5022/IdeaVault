@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const notFound = () => {
+const NotFound = () => {
     return (
         <div>
              <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4 text-center">
@@ -31,4 +31,4 @@ const notFound = () => {
     );
 };
 
-export default notFound;
+export default NotFound;
