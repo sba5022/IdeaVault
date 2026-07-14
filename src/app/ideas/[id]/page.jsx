@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth';
 import { Chip } from '@heroui/react';
 import Image from 'next/image';
 import React from 'react';
+
 import { headers } from 'next/headers';
 const IdeaDetailsPage = async ({params}) => {
     const {id} = await params;
@@ -16,9 +17,10 @@ console.log(token,'token');
         authorization: `Bearer ${token}`
       }
     });
+    
     const idea = await res.json();
    console.log(idea);
-     
+    
     return (
         <div>
               <div className="bg-base-200 min-h-screen py-10">

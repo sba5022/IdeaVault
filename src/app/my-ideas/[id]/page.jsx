@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-
-
+import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 export default  function UpdateIdeaPage() {
   const { id } = useParams();
   const router = useRouter();
@@ -41,6 +41,9 @@ export default  function UpdateIdeaPage() {
   };
 
   const handleUpdate = async () => {
+    const { data } = await authClient.getAccessToken();
+
+const token = data?.token;
     await fetch(`http://localhost:9000/my-idea/${id}`, {
       method: "PUT",
       headers: {
@@ -51,21 +54,28 @@ export default  function UpdateIdeaPage() {
     });
 
     setUpdateOpen(false);
-    alert("Idea Updated Successfully!");
+    toast("Idea Updated Successfully!");
   };
 
 const handleDelete = async () => {
+  
   const res = await fetch(`http://localhost:9000/my-idea/${id}`, {
     method: "DELETE",
-     headers:{
-        authorization:`Bearer ${token}`
-    }
+    //  headers:{
+    //     authorization:`Bearer ${token}`
+    // }
   });
 
-  const data = await res.json();
-  console.log(data);
+  const result = await res.json();
+  console.log(result);
 
   router.push("/my-ideas");
+    if (res.ok) {
+    toast.success("Idea deleted successfully!");
+    router.push("/my-ideas");
+  } else {
+    toast.error("Failed to delete idea!");
+  }
 };
 
   return (

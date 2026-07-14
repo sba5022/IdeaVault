@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { authClient } from '@/lib/auth-client';
+import { toast } from "react-toastify";
 const AddIdeaPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ const AddIdeaPage = () => {
       },
       body:JSON.stringify(idea)
     })
+    toast("Idea Updated Successfully!");
     const data = await res.json();
       console.log(data);
     

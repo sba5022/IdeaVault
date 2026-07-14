@@ -80,7 +80,7 @@ router.refresh();
             Forgot password?
           </Link>
           <br />
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary w-full" type="submit">
             Login
           </button>
           <br />
@@ -88,6 +88,7 @@ router.refresh();
         <Separator />
         <p className="text-center">Or Login with </p>
         <Separator />
+        <br></br>
         <div>
           <button onClick={handleGoogleSignIn} className="btn btn-primary
            w-full ">

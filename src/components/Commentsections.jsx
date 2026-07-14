@@ -2,7 +2,7 @@
 
 import { Button, TextArea  } from "@heroui/react";
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 const initialComments = [
  
 ];
@@ -39,7 +39,7 @@ export default function CommentSection({ideaId, ideaTitle }) {
   // };
 const handleSubmit = async () => {
   if (!comment.trim()) return;
-
+ toast('Comment Added Successfully!');
   const newComment = {
     ideaId,          // pass this from parent
     ideaTitle,       // pass this from parent
