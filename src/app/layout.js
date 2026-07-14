@@ -37,9 +37,7 @@ export default function RootLayout({ children }) {
     position="top-right"
     autoClose={3000}
   />
-  <TrendingSection/>
-  <CategorySection/>
-  <HowItWorks/>
+  
          <Footer/>
         </body>
         
