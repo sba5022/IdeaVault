@@ -7,7 +7,7 @@ const { token } = await auth.api.getToken({
     headers: await headers()
 });
   const res = await fetch(
-    `http://localhost:9000/my-interactions?email=${email}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URI}/my-interactions?email=${email}`,
     {
       headers:{
         authorization:`Bearer ${token}`

@@ -1,29 +1,29 @@
-# 💡 IdeaVault
+#  IdeaVault
 
 IdeaVault is a full-stack idea sharing platform where users can submit, manage, and interact with innovative ideas. It provides a secure authentication system and a user-friendly interface for exploring creative solutions.
 
-## 🌐 Live Website
+##  Live Website
 
-🔗 https://your-live-site-url.vercel.app
+https://ideavault-beta.vercel.app
 
 > Replace the above URL with your deployed client-side URL.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🔐 Secure authentication using Better Auth (Email/Password & Google Login).
-- 💡 Users can create, update, and soft delete their own ideas.
-- 🔍 Search and filter ideas by title, category, and date.
-- 💬 Users can comment on ideas and view their interaction history.
-- 🌙 Light/Dark theme toggle with theme persistence using Local Storage.
-- 📱 Fully responsive design for desktop, tablet, and mobile devices.
-- 🔔 Toast notifications for CRUD operations and user interactions.
-- 🖼️ Beautiful UI built with Next.js, Tailwind CSS, DaisyUI, and HeroUI.
+-  Secure authentication using Better Auth (Email/Password & Google Login).
+-  Users can create, update, and soft delete their own ideas.
+-  Search and filter ideas by title, category, and date.
+-  Users can comment on ideas and view their interaction history.
+-  Light/Dark theme toggle with theme persistence using Local Storage.
+-  Fully responsive design for desktop, tablet, and mobile devices.
+-  Toast notifications for CRUD operations and user interactions.
+-  Beautiful UI built with Next.js, Tailwind CSS, DaisyUI, and HeroUI.
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 ### Frontend
 - Next.js 16
@@ -42,7 +42,7 @@ IdeaVault is a full-stack idea sharing platform where users can submit, manage, 
 
 ---
 
-## 📦 Installation
+##  Installation
 
 Clone the repository:
 
@@ -64,7 +64,7 @@ npm run dev
 
 ---
 
-## 🔑 Environment Variables
+##  Environment Variables
 
 Create a `.env.local` file and add:
 
@@ -79,6 +79,6 @@ BETTER_AUTH_URL=http://localhost:3000
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Sumaia Binta Asad**

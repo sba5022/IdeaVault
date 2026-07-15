@@ -36,7 +36,7 @@ const IdeaPage = () => {
 
 
     const res = await fetch(
-      `http://localhost:9000/idea?${params.toString()}`
+      `${process.env.NEXT_PUBLIC_SERVER_URI}/idea?${params.toString()}`
     );
 
     const data = await res.json();

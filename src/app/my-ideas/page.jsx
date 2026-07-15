@@ -7,7 +7,7 @@ const MyIdeaPage = async() => {
       const { token } = await auth.api.getToken({
     headers: await headers()
 });
-    const res = await fetch('http://localhost:9000/my-idea',
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/my-idea`,
       {
     headers: {
         authorization: `Bearer ${token}`

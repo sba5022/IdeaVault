@@ -3,6 +3,7 @@
 import { Button, TextArea  } from "@heroui/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { authClient } from '@/lib/auth-client';
 const initialComments = [
  
 ];
@@ -47,11 +48,16 @@ const handleSubmit = async () => {
     userEmail: "user@gmail.com", // logged-in user's email
     createdAt: new Date(),
   };
+const { data: tokenData } = await authClient.token();
 
-  await fetch("http://localhost:9000/comments", {
+console.log(tokenData);
+
+const token = tokenData?.token;
+  await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(newComment),
   });

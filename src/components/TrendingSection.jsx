@@ -9,7 +9,7 @@ const TrendingSection = () => {
 
   useEffect(() => {
     const fetchTrendingIdeas = async () => {
-      const res = await fetch("http://localhost:9000/idea");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/idea`);
       const data = await res.json();
 
       // Show only first 6 ideas

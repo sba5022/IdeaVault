@@ -12,7 +12,7 @@ const IdeaDetailsPage = async ({params}) => {
   headers: await headers()
 })
 console.log(token,'token');
-    const res = await fetch(`http://localhost:9000/idea/${id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/idea/${id}`,{
       headers:{
         authorization: `Bearer ${token}`
       }

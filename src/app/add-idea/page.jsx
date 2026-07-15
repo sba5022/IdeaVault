@@ -11,7 +11,7 @@ const AddIdeaPage = () => {
     console.log(idea);
     const {data:tokenData}=await authClient.token();
     console.log(tokenData,'tokenData');
-    const res =await fetch('http://localhost:9000/idea',{
+    const res =await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/idea`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
